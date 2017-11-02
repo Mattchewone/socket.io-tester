@@ -198,7 +198,10 @@ function subscribeSendMessageListener () {
 
             const socket = connection.socket
 
-            socket.emit(newMessage.eventName, ...newMessage.message)
+            // Parse the data as json, so we can get an object
+            const message = JSON.parse(newMessage.message[0])
+            // Manually map the message
+            socket.emit(newMessage.eventName, newMessage.message, {}, function() {})
         }
     })
 }
